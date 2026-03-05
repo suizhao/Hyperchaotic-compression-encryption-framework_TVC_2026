@@ -1,0 +1,4 @@
+MATLAB Version: R2024b
+Required Toolboxes: 
+- Image Processing Toolbox
+OS: Windows 11 (64-bit)
