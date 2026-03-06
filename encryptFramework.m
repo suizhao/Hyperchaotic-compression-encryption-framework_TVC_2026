@@ -1,8 +1,5 @@
-function [bitstream_enc,bit_seq,key_image,ite]=encryptFramework(I,key_image)
+function [bitstream_enc,bit_seq,key_image,ite]=encryptFramework(I,key_image,CW,QF,ITE)
 %% preprocess
-CW = 0.5;
-QF = 70;
-ITE = 15;
 [m,n]=size(I);
 key_initial = SHA256('123412341234');
 I = I-128;
