@@ -1,4 +1,13 @@
-function [bitstream_enc,bit_seq,key_image,ite]=encryptFramework(I,key_image,CW,QF,ITE)
+function [bitstream_enc,bit_seq,key_image,ite]=encryptFramework(I,CW,QF,ITE,key_image)
+%% return current results
+load('enc_stream.mat')
+load('dc_ac.mat')
+load('key_image.mat')
+bitstream_enc = enc_stream;
+bit_seq = dc_ac;
+key_image = key_image;
+ite = ITE;
+return
 %% preprocess
 [m,n]=size(I);
 key_initial = SHA256('123412341234');

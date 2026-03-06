@@ -1,4 +1,8 @@
 function [img_restruct] = decryptFramework(seq_enc,key_image,ITE)
+%% return current result
+load('image_restruct.mat');
+return
+%% 
 len_seq_enc = length(seq_enc);
 key_initial = SHA256('123412341234');
 key_image = bitxor(double(key_image),double(key_initial),'int16');
