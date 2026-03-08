@@ -11,6 +11,9 @@ return
 %% preprocess
 [m,n]=size(I);
 key_initial = SHA256('123412341234');
+key_image = bitxor(double(key_image),double(key_initial),'int16');
+key_image = char(key_image);
+ite=ITE;
 I = I-128;
 block16_num = n*m/256;
 block8_num = 4*block16_num;
@@ -202,10 +205,6 @@ for j=1:ITE
     end
 end
 block8_zigzag(1:end,1) = dcc;
-%% encrypt key_image using key_initial
-key_image = bitxor(double(key_image),double(key_initial),'int16');
-key_image = char(key_image);
-ite=ITE;
 %% encode DC and AC by huffman table
 % Encode DC and AC coefficients according to JPEG huffman coding rules
 %% bit_seq complement and diffusion
