@@ -10,8 +10,6 @@ This project implements a high-fidelity image compression-cryptosystem based on 
 
 ## Environment Requirements
 - MATLAB R2024b or later (compatible with most versions after R2018a)
-- Python 3.11 to support BLAKE3 algorithm.
-- git clone to support SHA256 that produced external key
 
 ## File Structure
 ├── encryption_framework.m  # Encryption Framework
