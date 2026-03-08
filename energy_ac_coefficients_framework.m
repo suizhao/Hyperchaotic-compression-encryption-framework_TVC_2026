@@ -42,7 +42,6 @@ for r=1:m/16
 end
 
 %% sketch attack
-% energy of ac
 energy_map(m/8,n/8)=0;
 
 for i=1:m/8
@@ -52,7 +51,6 @@ for i=1:m/8
     end
 end
 
-% num of nonzero
 num_nonzero(m/8,n/8)=0;
 for i=1:m/8
     for j=1:n/8
@@ -61,7 +59,6 @@ for i=1:m/8
     end
 end
 
-% last index of nonzero in zigzag
 last_nonzero(m/8,n/8)=0;
 for i=1:m/8
     for j=1:n/8
@@ -77,3 +74,4 @@ end
 
 return;
     
+
