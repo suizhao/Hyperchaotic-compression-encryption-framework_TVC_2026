@@ -23,59 +23,8 @@ block8_num = block16_num*4;
 block8_zigzag = zeros(block8_num,64);
 % Perform Huffman decoding on data_compressed according to JPEG Huffman decoding rules 
 % to obtain zigzag-scanned frequency domain coefficient data
-%% Get s vector and last_bit vector from AC coefficient and Decode them
-zero_ac(block8_num)=0;
-for bx=1:block8_num
-   zero_ac(bx)=sum(block8_zigzag(bx,2:end)==0); 
-end
-[zero_ac_sort,zero_index] = sort(zero_ac,'descend');
-s(block16_num)='0';
-k=1;
-for bi=1:block8_num
-    if zero_ac_sort==63
-        continue;
-    end
-    for bj=2:64
-        if block8_zigzag(zero_index(bi),bj)==0
-            continue;
-        elseif block8_zigzag(zero_index(bi),bj)==1
-            block8_zigzag(zero_index(bi),bj)=1;
-            s(k)='0';
-            k=k+1;
-            if k>block16_num
-                break;
-            end
-        elseif block8_zigzag(zero_index(bi),bj)==-1
-            block8_zigzag(zero_index(bi),bj)=-1;
-            s(k)='0';
-            k=k+1;
-            if k>block16_num
-                break;
-            end
-        elseif block8_zigzag(zero_index(bi),bj)==2
-            block8_zigzag(zero_index(bi),bj)=1;
-            s(k)='1';
-            k=k+1;
-            if k>block16_num
-                break;
-            end
-        elseif block8_zigzag(zero_index(bi),bj)==-2
-            block8_zigzag(zero_index(bi),bj)=-1;
-            s(k)='1';
-            k=k+1;
-            if k>block16_num
-                break;
-            end
-        elseif block8_zigzag(zero_index(bi),bj)>=3
-            block8_zigzag(zero_index(bi),bj)=block8_zigzag(zero_index(bi),bj)-1;
-        else
-            block8_zigzag(zero_index(bi),bj)=block8_zigzag(zero_index(bi),bj)+1;
-        end
-    end
-    if k>block16_num
-        break;
-    end
-end
+%% Get s vector from AC coefficient and Decode them
+% inverse embed oprate
 
 % Generate encryption key key4 based on chaotic sequence k4
 for bx=1:block16_num
@@ -213,4 +162,5 @@ end
 
 
 return;
+
 
