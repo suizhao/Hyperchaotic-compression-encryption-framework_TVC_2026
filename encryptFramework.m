@@ -10,9 +10,11 @@ ite = ITE;
 return
 %% preprocess
 [m,n]=size(I);
-key_initial = SHA256('123412341234');
-key_image = bitxor(double(key_image),double(key_initial),'int16');
-key_image = char(key_image);
+% Intergrate External Key and Interference Key Based on Original Image
+% This part is temporarily commented out to facilitate cloning and running, as it only affects the generation of initial parameter values for the chaotic system.
+    % key_initial = SHA256('123412341234');
+    % key_image = bitxor(double(key_image),double(key_initial),'int16');
+    % key_image = char(key_image);
 ite=ITE;
 I = I-128;
 block16_num = n*m/256;
@@ -221,4 +223,5 @@ block8_zigzag(1:end,1) = dcc;
 % EOI
 % no some unuseful FF
 bitstream_enc=[SOI,APP0,DQT,SOF0,DHT_DC,DHT_AC,SOS,bit_seq,EOI];
+
 return;
