@@ -4,9 +4,11 @@ load('image_restruct.mat');
 return
 %% 
 len_seq_enc = length(seq_enc);
-key_initial = SHA256('123412341234');
-key_image = bitxor(double(key_image),double(key_initial),'int16');
-key_image = char(key_image);
+% Intergrate External Key and Interference Key Based on Original Image
+% This part is temporarily commented out to facilitate cloning and running, as it only affects the generation of initial parameter values for the chaotic system.
+   % key_initial = SHA256('123412341234');
+   % key_image = bitxor(double(key_image),double(key_initial),'int16');
+   % key_image = char(key_image);
 %% get compressed data bitstream
 % Extract compressed data data_compressed from JPEG encoded stream,
 % original image height height_img, width width_img, quantization table QT
@@ -210,5 +212,6 @@ for r=1:height_img/16
         k=k+1;
     end
 end
+
 
 return;
