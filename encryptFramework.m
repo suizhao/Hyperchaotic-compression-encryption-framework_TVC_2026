@@ -139,7 +139,7 @@ end
 for bx=block8_num:-1:2
     block8_zigzag(bx,1) = block8_zigzag(bx,1)-block8_zigzag(bx-1,1);
 end
-%% complement s vector by key,then and enbed it as well as last_bit vector into AC coefficient
+%% complement s vector by key,then and enbed it into AC coefficient
 % Generate encryption key key4 based on chaotic sequence k4
 for bx=1:block16_num
     if key4(bx) == 1
@@ -151,41 +151,7 @@ for bx=1:block16_num
     end
 end
 clear key4;
-zero_ac(block8_num)=0;
-for bx=1:block8_num
-   zero_ac(bx)=sum(block8_zigzag(bx,2:end)==0); 
-end
-[zero_ac_sort,zero_index] = sort(zero_ac,'descend');
-k=1;
-for bi=1:block8_num
-    if zero_ac_sort==63
-        continue;
-    end
-    for bj=2:64
-        if block8_zigzag(zero_index(bi),bj)==0
-            continue;
-        elseif block8_zigzag(zero_index(bi),bj)==1
-            block8_zigzag(zero_index(bi),bj)=1+s(k)-'0';
-            k=k+1;
-            if k>block16_num
-                break;
-            end
-        elseif block8_zigzag(zero_index(bi),bj)==-1
-            block8_zigzag(zero_index(bi),bj)=-1-s(k)+'0';
-            k=k+1;
-            if k>block16_num
-                break;
-            end
-        elseif block8_zigzag(zero_index(bi),bj)>1
-            block8_zigzag(zero_index(bi),bj)=block8_zigzag(zero_index(bi),bj)+1;
-        else
-            block8_zigzag(zero_index(bi),bj)=block8_zigzag(zero_index(bi),bj)-1;
-        end
-    end
-    if k>block16_num
-        break;
-    end
-end
+% embed oprate
 %% group and swap DC coefficient
 % Generate encryption key key3 with minimum length based on chaotic sequence k3 and characteristics of group scrambling
 dcc = block8_zigzag(1:end,1);
@@ -223,4 +189,5 @@ block8_zigzag(1:end,1) = dcc;
 bitstream_enc=[SOI,APP0,DQT,SOF0,DHT_DC,DHT_AC,SOS,bit_seq,EOI];
 
 return;
+
 
